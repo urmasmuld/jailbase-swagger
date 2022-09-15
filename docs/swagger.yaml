@@ -1,0 +1,215 @@
+openapi: 3.0.2
+info:
+    title: Jailbase
+    version: 1.0.0
+paths:
+    /criminals:
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PostLoginRequest'
+                            examples:
+                                CriminalsListPost:
+                                    value:
+                                        id: 1
+                                        name: Vin Diesel
+                                        crime: Speeding
+                                        img_link: vin-diesel.jpg
+                                        dob: '1976-01-12'
+                                        long_desc: Wanted for speeding countlesly in the fast and furious series.
+                    description: Test
+    '/criminals/{id}':
+        get:
+            parameters:
+                -
+                    examples:
+                        Time ID example:
+                            value: '1'
+                    name: id
+                    description: Time ID
+                    schema:
+                        type: integer
+                    in: path
+                    required: true
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CriminalsListPost'
+                            examples:
+                                CriminalItemGet:
+                                    value:
+                                        id: 1
+                                        name: Vin Diesel
+                                        crime: Speeding
+                                        img_link: vin-diesel.jpg
+                                        dob: '1976-01-12'
+                                        long_desc: Wanted for speeding countlesly in the fast and furious series.
+                    description: Kala
+        parameters:
+            -
+                examples:
+                    Time ID example:
+                        value: '1'
+                name: id
+                description: Time ID
+                schema:
+                    type: integer
+                in: path
+                required: true
+    /login:
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PostLoginRequest'
+                        examples:
+                            PostLoginRequest:
+                                value:
+                                    username: admin
+                                    password: qwerty
+                required: true
+            responses:
+                '200':
+                    content:
+                        text/html:
+                            schema:
+                                type: string
+                            examples:
+                                PostLoginResponseExample:
+                                    value: 'true'
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                            examples:
+                                PostLoginResponseWrongCredentials:
+                                    value:
+                                        error: wrong credentials
+                    description: |-
+                        Login responses
+                        Check various media types
+    /adminCheck:
+        get:
+            responses:
+                '200':
+                    content:
+                        text/html:
+                            schema:
+                                type: string
+                            examples:
+                                AdminCheckResponse:
+                                    value: 'true'
+                    description: Kala
+    /criminals/add:
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PostLoginRequest'
+                        examples:
+                            PostCriminalAdd:
+                                value:
+                                    id: '5'
+                                    name: Name
+                                    crime: crime
+                                    img_link: placeholder-300x300.webp
+                                    dob: 01.01.2001
+                                    long_desc: long_desc
+                required: true
+            responses:
+                '200':
+                    content:
+                        text/html:
+                            schema:
+                                type: string
+                            examples:
+                                AddCriminal:
+                                    value: correct
+                    description: test
+    /criminals/delete:
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Kammkala'
+                        examples:
+                            Kammkala:
+                                value:
+                                    crim_id: 4
+                required: true
+            responses:
+                '200':
+                    content:
+                        text/html:
+                            schema:
+                                type: string
+                            examples:
+                                ResponseFromDelete:
+                                    value: correct
+                    description: Response from server
+components:
+    schemas:
+        PostLoginRequest:
+            title: Root Type for PostLoginRequest
+            description: ''
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+            example:
+                username: admin
+                password: qwerty
+        Error:
+            title: Root Type for Error
+            description: ''
+            type: object
+            properties:
+                error:
+                    type: string
+            example:
+                error: some text
+        CriminalsListPost:
+            title: Root Type for CriminalsListPost
+            description: ''
+            type: object
+            properties:
+                id:
+                    format: int32
+                    type: integer
+                name:
+                    type: string
+                crime:
+                    type: string
+                img_link:
+                    type: string
+                dob:
+                    format: date
+                    type: string
+                long_desc:
+                    type: string
+            example:
+                id: 1
+                name: Vin Diesel
+                crime: Speeding
+                img_link: vin-diesel.jpg
+                dob: '1976-01-12'
+                long_desc: Wanted for speeding countlesly in the fast and furious series.
+        Kammkala:
+            title: Root Type for Kammkala
+            description: ''
+            type: object
+            properties:
+                crim_id:
+                    format: int32
+                    type: integer
+            example:
+                crim_id: 4

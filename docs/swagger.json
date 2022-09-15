@@ -1,0 +1,70 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Jailbase",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/criminals": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Criminals_response"
+                                }
+                            }
+                        },
+                        "description": "Resturns list of criminals"
+                    }
+                },
+                "description": "Returns list of criminals"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Criminals_response": {
+                "title": "Root Type for Criminals_response",
+                "description": "",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "crime": {
+                            "type": "string"
+                        },
+                        "dob": {
+                            "format": "date",
+                            "type": "string"
+                        },
+                        "id": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "img_link": {
+                            "type": "string"
+                        },
+                        "long_desc": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "example": [
+                    {
+                        "crime": "Speeding",
+                        "dob": "1976-01-12",
+                        "id": 1,
+                        "img_link": "vin-diesel.jpg",
+                        "long_desc": "Wanted for speeding countlesly in the fast and furious series.",
+                        "name": "Vin Diesel"
+                    }
+                ]
+            }
+        }
+    }
+}
