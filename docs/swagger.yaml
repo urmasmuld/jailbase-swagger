@@ -203,8 +203,8 @@ components:
                 img_link: vin-diesel.jpg
                 dob: '1976-01-12'
                 long_desc: Wanted for speeding countlesly in the fast and furious series.
-        Kammkala:
-            title: Root Type for Kammkala
+        CriminalID:
+            title: Root Type for CriminalID
             description: ''
             type: object
             properties:
